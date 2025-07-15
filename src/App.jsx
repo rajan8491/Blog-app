@@ -1,4 +1,3 @@
-import './App.css'
 import conf from './conf/conf';
 
 function App() {
@@ -6,9 +5,9 @@ function App() {
   
   return (
     <>
-      <h1>
-        blog app with react and appwrite
-      </h1>
+      <div className = 'test-3xl text-center bg-gray-600'>
+          test
+      </div>
     </>
   )
 }

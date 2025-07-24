@@ -132,3 +132,6 @@ class Service {
         }
     }
 }
+
+const appwriteServices = new Service()
+export default appwriteServices

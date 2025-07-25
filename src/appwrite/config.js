@@ -110,6 +110,7 @@ class Service {
         }
     }
 
+/*
     async updateFile(fileId){
         try {
             return await this.bucket.updateFile(conf.appwrite_bucket_id,
@@ -120,6 +121,10 @@ class Service {
             return false
         }
     }
+
+    note -> update file is used to update the meta data of file not file itself
+
+*/ 
 
     getFilePreview(fileId){
         try {

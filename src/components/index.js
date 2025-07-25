@@ -4,9 +4,11 @@ import {Button} from './Button'
 import {Container} from './container/Container'
 import {Header} from './Header/Header'
 import {Footer} from './Footer/Footer'
-
-
-
+import {Login} from './Login'
+import {PostCard} from './PostCard'
+import {Signup} from './Signup'
+import {RTE} from './RTE'
+import {Select} from './Select'
 
 
 
@@ -16,5 +18,11 @@ export default {
     Button,
     Container,
     Header,
-    Footer
+    Footer,
+    Login,
+    Signup,
+    RTE,
+    PostCard,
+    Select
+
 }

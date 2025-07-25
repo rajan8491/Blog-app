@@ -136,7 +136,7 @@ export default PostForm
 
 /*
 
-setValue -> allows us to set field value programatically. 
+setValue -> allows us to set field value programatically.  It re-renders when field is being watched
 
 getValues -> gives form data without re-rendering. also you get data before submitting the form
 

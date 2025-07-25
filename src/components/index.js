@@ -9,6 +9,7 @@ import {PostCard} from './PostCard'
 import {Signup} from './Signup'
 import {RTE} from './RTE'
 import {Select} from './Select'
+import {PostForm} from './post-form/PostForm'
 
 
 
@@ -23,6 +24,7 @@ export default {
     Signup,
     RTE,
     PostCard,
-    Select
+    Select,
+    PostForm
 
 }

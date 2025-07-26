@@ -1,15 +1,19 @@
 import React, { useCallback, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import Input from '../Input'
-import RTE from '../RTE'
+import {Input, RTE, Select, Button} from '../index'
 import appwriteServices from '../../appwrite/config'
-import Select from '../Select'
-import Button from '../Button'
 import { useNavigate } from 'react-router'
 import { useSelector } from 'react-redux'
 
 function PostForm({post}) {
-    const {register, handleSubmit, control, watch, setValue, getValues} = useForm()
+    const {register, handleSubmit, control, watch, setValue, getValues} = useForm({
+        defaultValues: {
+            title: post ? post.title : "",
+            slug: post ? post.slug : "",
+            content: post ? post.content : "",
+            status: post ? post.status : active
+        }
+    })
     const navigate = useNavigate()
     const userData = useSelector((state) => state.auth.userData)
 
@@ -151,7 +155,5 @@ type-> event type
 note -> This is event-driven: you're asking RHF to observe all changes and run a function when something changes.
 
 It's like adding an eventListener, and must be removed (i.e., unsubscribed).
-
-
 
 */

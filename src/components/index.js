@@ -1,22 +1,22 @@
-import {Logo} from './Logo'
-import {Input} from './Input'
-import {Button} from './Button'
-import {Container} from './container/Container'
-import {Header} from './Header/Header'
-import {Footer} from './Footer/Footer'
-import {Login} from './Login'
-import {PostCard} from './PostCard'
-import {Signup} from './Signup'
-import {RTE} from './RTE'
-import {Select} from './Select'
-import {PostForm} from './post-form/PostForm'
+import Logo from './Logo'
+import Input from './Input'
+import Button from './Button'
+import Container from './container/Container'
+import Header from './Header/Header'
+import Footer from './Footer/Footer'
+import Login from './Login'
+import PostCard from './PostCard'
+import Signup from './Signup'
+import RTE from './RTE'
+import Select from './Select'
+import PostForm from './post-form/PostForm'
+import AuthLayout from './AuthLayout'
 
 
 
-export default {
+export {
     Logo,
     Input,
-    Button,
     Container,
     Header,
     Footer,
@@ -25,6 +25,7 @@ export default {
     RTE,
     PostCard,
     Select,
-    PostForm
-
+    PostForm,
+    AuthLayout,
+    Button
 }

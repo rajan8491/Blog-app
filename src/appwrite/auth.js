@@ -9,7 +9,7 @@ class AuthService {
         .setEndpoint(conf.appwrite_url)
         .setProject(conf.appwrite_project_id)
 
-        account = new Account(client)
+        this.account = new Account(this.client)
     }
 
     async createAccount({ email, password, name}){

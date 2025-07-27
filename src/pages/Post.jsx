@@ -9,6 +9,7 @@ function Post() {
     const {slug} = useParams();
     const [post, setPost] = useState(null);
     const [loading, setLoading] = useState(true)
+    const [showConfirm, setShowConfirm] = useState(false)
     const navigate = useNavigate();
     const userData = useSelector((state) => state.auth.userData)
 
@@ -26,7 +27,6 @@ function Post() {
     let imageFile    
     if(post){
         imageFile = appwriteServices.getFileView(post.featuredImage)
-        console.log(imageFile)
     }
 
     const deletePost = async () => {
@@ -63,7 +63,7 @@ function Post() {
                                 Edit
                             </Button>
                         </Link>
-                        <Button bgColor='bg-red-500' onClick={deletePost}>
+                        <Button bgColor='bg-red-500' onClick={() => setShowConfirm(true)}>
                             Delete
                         </Button>
                     </div>
@@ -77,9 +77,41 @@ function Post() {
             <div className='browser-css'>
                 {parse(post.content)}
             </div>
+
+            {showConfirm && (
+  <div className="fixed inset-0 z-50 backdrop-blur-sm bg-black/30 flex items-center justify-center">
+    <div className="bg-white rounded-2xl shadow-xl p-6 w-[90%] max-w-md text-center">
+      <h2 className="text-lg font-semibold mb-4">Confirm Deletion</h2>
+      <p className="text-gray-700 mb-6">Are you sure you want to delete this post?</p>
+      
+      <div className="flex justify-center gap-4">
+        <button 
+          onClick={deletePost}
+          className="bg-red-500 text-white px-4 py-2 rounded-xl hover:bg-red-600 transition"
+        >
+          Yes, Delete
+        </button>
+        <button 
+          onClick={() => setShowConfirm(false)}
+          className="bg-gray-300 px-4 py-2 rounded-xl hover:bg-gray-400 transition"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
         </Container>
     </div>
+    
+
   )
 }
 
 export default Post
+
+
+
+//flex items-center justify-center
+//rounded-2xl shadow-xl p-6 w-[90%] max-w-md text-center

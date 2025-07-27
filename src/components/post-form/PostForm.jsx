@@ -6,12 +6,13 @@ import { useNavigate } from 'react-router'
 import { useSelector } from 'react-redux'
 
 function PostForm({post}) {
+    console.log(post)
     const {register, handleSubmit, control, watch, setValue, getValues} = useForm({
         defaultValues: {
             title: post ? post.title : "",
             slug: post ? post.slug : "",
             content: post ? post.content : "",
-            status: post ? post.status : active
+            status: post ? post.status : 'active'
         }
     })
     const navigate = useNavigate()
@@ -36,13 +37,13 @@ function PostForm({post}) {
         }
         else{
             const imageId = await appwriteServices.uploadFile(data.image[0])
+            
             const newPost = await appwriteServices.createPost({
                 ...data,
                 featuredImage: imageId.$id,
-                userId: userData
+                userId: userData.$id
             })
-            if(newPost)
-                navigate(`/post/${newPost.$id}`)
+            if(newPost) navigate(`/post/${newPost.$id}`)
         }
     }
 
@@ -107,7 +108,7 @@ function PostForm({post}) {
             {post && (
                 <div className='w-full mb-4'>
                     <img
-                    src={appwriteServices.getFilePreview(post.featuredImage
+                    src={appwriteServices.getFileView(post.featuredImage
                     )}
                     alt={post.title}
                     className='rounded-lg'

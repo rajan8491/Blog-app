@@ -1,26 +1,33 @@
 import React, { useEffect, useState } from 'react'
 import {Link, useNavigate, useParams} from 'react-router'
-import {useSelect} from 'react-redux'
+import {useSelector} from 'react-redux'
 import appwriteServices from '../appwrite/config';
 import {Button, Container} from '../components/index'
-import {parse} from 'html-react-parser'
+import parse from 'html-react-parser'
 
 function Post() {
     const {slug} = useParams();
     const [post, setPost] = useState(null);
     const [loading, setLoading] = useState(true)
     const navigate = useNavigate();
-    const userData = useSelect((state) => state.auth.userData)
+    const userData = useSelector((state) => state.auth.userData)
 
-    const isAuthor = post && userData ? post.$id === userData.userId : false
+    const isAuthor = post && userData ? post.userId === userData.$id : false
 
-    useEffect(async () => {
-        const post = await appwriteServices.getPost(slug)
-        if(post)
-          setPost(post)
-        else navigate('/')
-        setLoading(false)
+    useEffect(() => {
+        appwriteServices.getPost(slug)
+            .then((post) => {
+                if(post) setPost(post)
+                else navigate('/')
+            })
+            .finally(() => setLoading(false))
     }, [slug, navigate])
+
+    let imageFile    
+    if(post){
+        imageFile = appwriteServices.getFileView(post.featuredImage)
+        console.log(imageFile)
+    }
 
     const deletePost = async () => {
         const isDeleted = await appwriteServices.deletePost(slug)
@@ -44,7 +51,7 @@ function Post() {
         <Container>
             <div className='w-full flex justify-center mb-4 relative border rounded-xl'>
                 <img
-                src={appwriteServices.getFilePreview(post.featuredImage)}
+                src={imageFile}
                 alt={post.title}
                 className='rounded-xl'
                 />

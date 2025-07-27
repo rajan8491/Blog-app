@@ -11,6 +11,7 @@ import RTE from './RTE'
 import Select from './Select'
 import PostForm from './post-form/PostForm'
 import AuthLayout from './AuthLayout'
+import LogoutBtn from './Header/LogoutBtn'
 
 
 
@@ -27,5 +28,6 @@ export {
     Select,
     PostForm,
     AuthLayout,
-    Button
+    Button,
+    LogoutBtn
 }

@@ -5,16 +5,17 @@ import {Container, PostForm} from '../components/index'
 
 function EditPost() {
     const {slug} = useParams()
-    const {post, setPost} = useState(null)
-    const {loading, setLoading} = useState(true)
+    const [post, setPost] = useState(null)
+    const [loading, setLoading] = useState(true)
     const navigate = useNavigate()
 
-    useEffect(async () => {
-        const post = await appwriteServices.getPost(slug)
-        if(post)
-          setPost(post)
-        else navigate('/')
-        setLoading(false)
+    useEffect(() => {
+        appwriteServices.getPost(slug)
+            .then((post) => {
+                if(post) setPost(post)
+                else navigate('/')
+            })
+            .finally(() => setLoading(false))
     }, [slug, navigate])
 
     if(loading)
@@ -25,6 +26,8 @@ function EditPost() {
                 </h1>
             </div>
         )
+        
+        console.log(post)
 
   return (
     <div className='py-8'>

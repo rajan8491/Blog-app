@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import conf from './conf/conf';
 import { useDispatch } from 'react-redux';
 import authService from './appwrite/auth';
@@ -10,12 +10,15 @@ function App() {
     const [loading, setLoading] = useState(true)
     const dispatch = useDispatch()
 
-    useEffect(async() => {
+    useEffect(() => {
         authService.getCurrentUser()
-            .then((data) => {
-                if(data) dispatch(login({data}))
+            .then((userData) => {
+                if(userData){
+                  dispatch(login({userData}))
+                }
                 else dispatch(logout())
             })
+            .catch((err) => console.log(err.message))
             .finally(() => setLoading(false))
     }, [])
   
@@ -30,10 +33,10 @@ function App() {
 
   return (
     <>
-      <div className = 'min-h-screen flex flex-wrap content-between bg-gray-400'>
+      <div className = 'min-h-screen flex flex-col bg-gray-400'>
           <Header/>
-          <main>
-            {/* <Outlet/> */}
+          <main className='flex-grow'>
+            <Outlet/>
           </main>
           <Footer/>
       </div>

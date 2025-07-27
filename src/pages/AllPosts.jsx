@@ -6,10 +6,12 @@ import PostCard from '../components/PostCard';
 function AllPosts() {
     const [posts, setPosts] = useState([])
     const [loading, setLoading] = useState(true)
-    useEffect(async () => {
-        const posts = await appwriteServices.getAllPost()
-        setPosts(posts)
-        setLoading(false)
+    useEffect(() => {
+        appwriteServices.getAllPost()
+            .then((posts) => {
+                if(posts) setPosts(posts.documents)
+            })
+            .finally(() => setLoading(false))
     }, [])
 
     if(loading)

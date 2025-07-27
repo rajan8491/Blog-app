@@ -126,9 +126,9 @@ class Service {
 
 */ 
 
-    getFilePreview(fileId){
+    getFileView(fileId){
         try {
-            return this.bucket.getFilePreview(conf.appwrite_bucket_id,
+            return this.bucket.getFileView(conf.appwrite_bucket_id,
                 fileId
             ) 
         } catch (error) {

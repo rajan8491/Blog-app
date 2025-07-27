@@ -11,6 +11,8 @@ function AuthLayout({children, isAuthRequired = true}) {
     useEffect(() => {
         if(isAuthRequired && status !== true)
             navigate('/login')
+        else if(!isAuthRequired && status === true)
+            navigate('/')
         setLoading(false)
     })
 
